@@ -8,6 +8,8 @@ Shunt works on files to combines, minify and replace strings etc, so that what g
 
 # Example
 
+Write a build.js script, this is where you sort the shit out. Here's an example...
+
 	# Include the library
 	var shunt = require('shunt');
 
@@ -20,19 +22,25 @@ Shunt works on files to combines, minify and replace strings etc, so that what g
 		'combine.min.js' : ['input1.js', 'input2.js'],
 
 		# Create an MarkDown file from an HTML file
-		'output.md' : 'input.html'
+		'output.md' : 'input.html',
+
+		# Move an HTML file
+		'output.html' : 'input.html'
 	}, {
 
 		replace : {
-			# replace all local development paths with a remote paths, {replace => find, ... }
-
-			'http://remote.com/' : '//localhost/'
+			# replace all local environment strings with development paths e.g. {find => replace, ... }
+			'http://localhost/' : 'http://remote.com/'
 		}
 	})
 
-# Semi Automating
+Then run it `node build.js`, got it? Boom!
 
-I use Sublime Text 2, and have set this up in a script which gets called when
+
+# Automate
+
+This is a bit generic but run your file
+If your ID supportsSublime Text 2, and have set this up in a script which gets called when
 
 # Contributing
 
