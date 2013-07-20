@@ -1,6 +1,6 @@
 # Shunt (A Shit alternative to Grunt, hence Sh+unt)
 
-Shunt works on files to combines, minify and replace strings etc, so that what gets spat out is nicely packed for production.
+Shunt works on files to combine, minify and replace strings etc. What gets spat out is nicely packed for production.
 
 # Install 
 
@@ -37,10 +37,34 @@ Write a build.js script, this is where you sort the shit out. Here's an example.
 Then run it `node build.js`, got it? Boom!
 
 
+# Magic shit
+
+Moving an html file to a new place, also grabs relative files links to .css and .js files and moves them too (by default they also get minified, again Boom!).
+
+	shunt({
+		'bin/index.html' : 'src/index.html'
+	})
+
+
 # Automate
 
-This is a bit generic but run your file
-If your ID supportsSublime Text 2, and have set this up in a script which gets called when
+Not unique to this project but here's how i automate the build process in Sublime Text 2.
+
+After creating a script like `build.js` above (actually i prefix with a underscore to make it different, e.g. `_build.js`, do this, it'll sit nicely at the top of your file lists!)
+
+In Sublime Text 2 go to "Tools" -> "Build System" -> "New Build System..."
+
+Paste the following code
+
+	{
+		"cmd": ["node", "${file_path:${folder}}/_build.js", "$file_path"],
+		"working_dir" : "${file_path:${folder}}"
+	}
+
+Save with a memorable name e.g. "build.js", aka "build.js.sublime-build". Then go back into "Tools" -> "Build System" and select it. 
+
+Now from the directory where it is installed type, Ctrl + B ... you should see some action.
+
 
 # Contributing
 
