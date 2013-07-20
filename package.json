@@ -1,0 +1,32 @@
+{
+  "name": "shunt",
+  "version": "0.0.1",
+  "description": "A shit alternative to grunt, hence sh+unt",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/MrSwitch/node-shunt"
+  },
+  "keywords": [
+    "grunt",
+    "build-tool"
+  ],
+  "author": "Andrew Dodson <andrewjdodson@gmail.com>",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/MrSwitch/node-shunt/issues"
+  },
+  "dependencies": {
+    "uglify-js": ">= 0.0.0",
+    "clean-css": ">= 0.0.0"
+  },
+  "engines"     : {
+    "node"      : "*"
+  },
+  "devDependencies": {
+    "should": ">= 0.0.0"
+  }
+}
