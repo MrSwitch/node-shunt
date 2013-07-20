@@ -2,7 +2,7 @@
   "name": "shunt",
   "version": "0.0.1",
   "description": "A shit alternative to grunt, hence sh+unt",
-  "main": "index.js",
+  "main": "shunt.js",
   "scripts": {
     "test": "mocha test/tests.js"
   },
