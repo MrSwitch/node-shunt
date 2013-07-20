@@ -1,4 +1,5 @@
-# Shunt (A Shit alternative to Grunt, hence Sh+unt)
+# Shunt 
+*A Shit alternative to Grunt, hence Shunt*
 
 Shunt works on files to combine, minify and replace strings etc. What gets spat out is nicely packed for production.
 
@@ -10,26 +11,26 @@ Shunt works on files to combine, minify and replace strings etc. What gets spat 
 
 Write a build.js script, this is where you sort the shit out. Here's an example...
 
-	# Include the library
+	// Include the library
 	var shunt = require('shunt');
 
-	# Start Shunting
+	// Start Shunting
 	shunt({
-		# Minify and shunt a single file
+		// Minify and shunt a single file
 		'output.min.js' : 'input.js',
 
-		# Create a combined minified file
+		// Create a combined minified file
 		'combine.min.js' : ['input1.js', 'input2.js'],
 
-		# Create an MarkDown file from an HTML file
+		// Create an MarkDown file from an HTML file
 		'output.md' : 'input.html',
 
-		# Move an HTML file
+		// Move an HTML file
 		'output.html' : 'input.html'
 	}, {
 
 		replace : {
-			# replace all local environment strings with development paths e.g. {find => replace, ... }
+			// replace all local environment strings with development paths e.g. {find => replace, ... }
 			'http://localhost/' : 'http://remote.com/'
 		}
 	})
