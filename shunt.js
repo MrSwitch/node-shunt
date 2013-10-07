@@ -207,6 +207,18 @@ module.exports = (function shunt(o,opts){
 					else if (tag === 'li'){
 						prefix = '- ';
 					}
+					else if (tag === 'strike'){
+						prefix = '~~';
+						suffix = '~~';
+					}
+					else if (tag === 'b'||tag === 'strong'){
+						prefix = '**';
+						suffix = '**';
+					}
+					else if (tag === 'em'||tag === 'i'){
+						prefix = '*';
+						suffix = '*';
+					}
 					return prefix + content.replace(reg,self) + suffix;
 				}).replace(/<\/?([^>]+)>/g,function(m,tag){
 
