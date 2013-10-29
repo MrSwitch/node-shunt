@@ -140,22 +140,6 @@ module.exports = (function shunt(o,opts){
 
 
 
-	// Write File
-	function writeFile(name, code){
-		// Does the path exist?
-		createDir(path.dirname(name));
-		var err = fs.writeFileSync( name, code );
-		console.log(name + " created!");
-	}
-
-	function createDir(dirname){
-		if( !fs.existsSync(dirname) ) {
-			createDir(path.dirname(dirname));
-			fs.mkdirSync(dirname);
-		}
-	}
-
-
 	//
 	function htmlToMarkDown(s,dir){
 
@@ -415,6 +399,10 @@ function merge(a,b){
 
 function copyFileSync(srcFile, destFile) {
 
+	// Check folder exists, or create it.
+	createDir(path.dirname(destFile));
+
+
 	var BUF_LENGTH = 64 * 1024,
 		buff = new Buffer(BUF_LENGTH),
 		fdr = fs.openSync(srcFile, "r"),
@@ -430,3 +418,21 @@ function copyFileSync(srcFile, destFile) {
 	fs.closeSync(fdr);
 	return fs.closeSync(fdw);
 }
+
+
+
+// Write File
+function writeFile(name, code){
+	// Does the path exist?
+	createDir(path.dirname(name));
+	var err = fs.writeFileSync( name, code );
+	console.log(name + " created!");
+}
+
+function createDir(dirname){
+	if( !fs.existsSync(dirname) ) {
+		createDir(path.dirname(dirname));
+		fs.mkdirSync(dirname);
+	}
+}
+

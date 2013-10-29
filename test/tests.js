@@ -58,20 +58,24 @@ describe('IndexToMarkDown', function(){
 describe('Copying files', function(){
 	it("should create the directory structure", function(){
 
-		// Input file
-		var input = src+'style/style.css',
-			output = temp+'style/style.css';
+		var a = ['style/style.css','media/hangup.mp3'];
 
 		// Ops
 		var files = {};
 		// Take example.html and create a .md file from it.
-		files[output] = input;
+		a.forEach(function(a){
+			files[temp+a] = src+a;
+		});
+
 
 		// Create files
 		shunt(files);
 
-		// Whats the verdict?
-		fs.existsSync(output).should.be[true];
+		// Take example.html and create a .md file from it.
+		a.forEach(function(a){
+			// Whats the verdict?
+			fs.existsSync(temp+a).should.be[true];
+		});
 	});
 });
 
