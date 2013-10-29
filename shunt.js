@@ -4,6 +4,7 @@
 
 // Require IO operations
 var fs = require('fs');
+var path = require('path');
 
 var default_opts = {
 	// Strings to replace in the files parsed.
@@ -141,8 +142,17 @@ module.exports = (function shunt(o,opts){
 
 	// Write File
 	function writeFile(name, code){
+		// Does the path exist?
+		createDir(path.dirname(name));
 		var err = fs.writeFileSync( name, code );
 		console.log(name + " created!");
+	}
+
+	function createDir(dirname){
+		if( !fs.existsSync(dirname) ) {
+			createDir(path.dirname(dirname));
+			fs.mkdirSync(dirname);
+		}
 	}
 
 
@@ -204,6 +214,10 @@ module.exports = (function shunt(o,opts){
 						prefix = '[';
 						suffix = ']('+(getAttributes(attr).href||'')+')';
 					}
+					else if (tag === 'code'){
+						prefix = '`';
+						suffix = '`';
+					}
 					else if (tag === 'li'){
 						prefix = '- ';
 					}
@@ -230,8 +244,9 @@ module.exports = (function shunt(o,opts){
 						body = false;
 						return '';
 					}
-					else 
+					else {
 						return '';
+					}
 				}).replace(entities[0], entities[1]));
 			}
 		}

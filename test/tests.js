@@ -18,6 +18,18 @@ if(!fs.existsSync(temp)){
 	fs.mkdirSync(temp);
 }
 
+//
+// After running a shunt test, remove the temp folder
+afterEach(function(done){
+	removeDir(temp+"/*");
+	done();
+});
+
+
+
+/////////////////////////////////////
+// TESTS
+/////////////////////////////////////
 
 describe('IndexToMarkDown', function(){
 	it("should be able to convert an HTML page to markdown", function(){
@@ -40,3 +52,56 @@ describe('IndexToMarkDown', function(){
 
 	});
 });
+
+
+
+describe('Copying files', function(){
+	it("should create the directory structure", function(){
+
+		// Input file
+		var input = src+'style/style.css',
+			output = temp+'style/style.css';
+
+		// Ops
+		var files = {};
+		// Take example.html and create a .md file from it.
+		files[output] = input;
+
+		// Create files
+		shunt(files);
+
+		// Whats the verdict?
+		fs.existsSync(output).should.be[true];
+	});
+});
+
+
+/////////////////////////////////////
+/////////////////////////////////////
+/////////////////////////////////////
+///////////////UTILS/////////////////
+/////////////////////////////////////
+/////////////////////////////////////
+/////////////////////////////////////
+
+function removeDir(path){
+	var files = [];
+	var root = !path.match(/\/\*$/);
+
+	path = path.replace(/\/\*$/,'');
+
+	if( fs.existsSync(path) ) {
+		files = fs.readdirSync(path);
+		files.forEach(function(file,index){
+			var curPath = path + "/" + file;
+			if(fs.statSync(curPath).isDirectory()) { // recurse
+				removeDir(curPath);
+			} else { // delete file
+				fs.unlinkSync(curPath);
+			}
+		});
+		if(root){
+			fs.rmdirSync(path);
+		}
+	}
+}
