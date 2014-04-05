@@ -182,7 +182,7 @@ module.exports = (function shunt(o,opts){
 				r.push(line.replace(entities[0], entities[1]));
 			}
 			else{
-				var reg = /<([a-z0-9]+)([^>]*)>(.*?)<\/\1>/g;
+				var reg = /<([a-z0-9]+)(\s[^>]*)?>(.*?)<\/\1>/g;
 				r.push(line.replace(reg, function self(m,tag,attr,content){
 					var suffix = '',
 						prefix = '';
