@@ -21,7 +21,7 @@ if(!fs.existsSync(temp)){
 //
 // After running a shunt test, remove the temp folder
 afterEach(function(done){
-	removeDir(temp+"/*");
+//	removeDir(temp+"/*");
 	done();
 });
 
@@ -58,7 +58,7 @@ describe('IndexToMarkDown', function(){
 describe('Copying files', function(){
 	it("should create the directory structure", function(){
 
-		var a = ['style/style.css','media/hangup.mp3'];
+		var a = ['style/style.css','media/audio/hangup.mp3'];
 
 		// Ops
 		var files = {};
