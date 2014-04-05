@@ -56,7 +56,7 @@ Shunt also doubles as a plugin for Grunt, a la shizame...
 		// [, subtask2 : {} [, etc...]];
 
 		// options
-		{
+		options : {
 			// e.g. replace
 		}
 	}
