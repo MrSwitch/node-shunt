@@ -5,9 +5,9 @@ Shunt works on files to combine, minify and replace strings etc. What gets spat 
 
 # Install 
 
-	npm install shunt
+	npm install shunt --save-dev
 
-# Example
+# Example (Gruntless)
 
 Write a build.js script, this is where you sort the shit out. Here's an example...
 
@@ -15,27 +15,53 @@ Write a build.js script, this is where you sort the shit out. Here's an example.
 	var shunt = require('shunt');
 
 	// Start Shunting
-	shunt({
-		// Minify and shunt a single file
-		'output.min.js' : 'input.js',
+	shunt(
+		// Files to shunt `target:file(s)`
+		{
+			// Minify and shunt a single file
+			'output.min.js' : 'input.js',
 
-		// Create a combined minified file
-		'combine.min.js' : ['input1.js', 'input2.js'],
+			// Create a combined minified file
+			'combine.min.js' : ['input1.js', 'input2.js'],
 
-		// Create an MarkDown file from an HTML file
-		'output.md' : 'input.html',
+			// Create an MarkDown file from an HTML file
+			'output.md' : 'input.html',
 
-		// Move an HTML file
-		'output.html' : 'input.html'
-	}, {
+			// Move an HTML file
+			'output.html' : 'input.html'
+		},
 
-		replace : {
-			// replace all local environment strings with development paths e.g. {find => replace, ... }
-			'http://localhost/' : 'http://remote.com/'
+		// OPTIONS
+		{
+			replace : {
+				// replace all local environment strings with development paths e.g. {find => replace, ... }
+				'http://localhost/' : 'http://remote.com/'
+			}
 		}
-	})
+	);
 
 Then run it `node build.js`, got it? Boom!
+
+# Example (Gruntful)
+
+Shunt also doubles as a plugin for Grunt, a la shizame...
+
+	shunt : {
+		// Slightly different structure
+
+		// Task's
+		subtask :{
+			// shunt files, as above
+		},
+		// [, subtask2 : {} [, etc...]];
+
+		// options
+		{
+			// e.g. replace
+		}
+	}
+
+
 
 
 # Magic shit

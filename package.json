@@ -4,7 +4,7 @@
   "description": "A shit alternative to grunt, hence sh+unt",
   "main": "shunt.js",
   "scripts": {
-    "test": "mocha test/tests.js"
+    "test": "mocha -w test/tests.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "uglify-js": ">= 0.0.0",
-    "clean-css": ">= 0.0.0"
+    "clean-css": "1.0.10"
   },
   "engines"     : {
     "node"      : "*"
