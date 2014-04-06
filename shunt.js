@@ -76,8 +76,10 @@ module.exports = (function shunt(o,opts){
 				else {
 					// Otherwise the target is just a file so lets add the content to the list of items to be compounded
 					// Add files to the target
+					var j = 1;
 					for(var x in _o){
-						files.push(_o[x]);
+						// Slide in
+						files.splice(i + j++, 0, _o[x]);
 					}
 				}
 				continue;
