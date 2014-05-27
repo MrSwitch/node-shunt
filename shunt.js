@@ -167,6 +167,7 @@ module.exports = (function shunt(o,opts){
 		// Loop through the HTML
 		var lines = s.split(/\n/),
 			r = [],
+			block,
 			body = false;
 
 		for(var i=0;i<lines.length;i++){
@@ -187,8 +188,19 @@ module.exports = (function shunt(o,opts){
 				r.push(line.replace(entities[0], entities[1]));
 			}
 			else{
-				var reg = /<(\/)?([a-z0-9]+)(\s[^>]*)?>(?:(.*?)<\/\2>)?/g;
-				r.push(line.replace(reg, function self(m,end,tag,attr,content){
+				var reg = /<(\/)?([a-z0-9]+)(\s[^>]*)?>(?:(.*?)(<\/\2>))?/g;
+				r.push(line.replace(reg, function self(m,end,tag,attr,content,closed){
+
+					//
+					// are we in a formatted block?
+					//
+					if(block&&tag!==block){
+						return m;
+					}
+					else{
+						block = null;
+					}
+
 
 					var suffix = '',
 						prefix = '';
@@ -199,6 +211,7 @@ module.exports = (function shunt(o,opts){
 					catch(e){
 						throw m;
 					}
+
 
 					if(tag.match(/h[0-9]/)){
 						prefix = tag.replace(/h([0-9])/, function(m,c){
@@ -233,10 +246,12 @@ module.exports = (function shunt(o,opts){
 					else if ( ( tag === 'script' && !attr.src ) || tag === 'pre' ){
 						if(!end){
 							var type = attr.type || (tag === 'script' ? 'javascript' : '');
-							prefix = '```'+ type +'\n';
+							prefix = '```'+ type;
+							block = tag;
 						}
-						else{
-							suffix = '\n```';
+						if(end||closed){
+							block = null;
+							suffix = '```';
 						}
 					}
 					else if( tag === 'script' && attr.src ){
@@ -245,6 +260,9 @@ module.exports = (function shunt(o,opts){
 					}
 					// Else if the line contains only a single element remove it.
 					else if(tag==="table"){
+						if(!end&&!closed){
+							block = tag;
+						}
 						return m;
 					}
 					else if(end){
