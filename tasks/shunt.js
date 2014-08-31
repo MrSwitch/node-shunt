@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 		delete this.data.options;
 
 		// Move files
-		shunt(this.data,this.options);
+		shunt(this.data,this.options());
 	});
  
 
