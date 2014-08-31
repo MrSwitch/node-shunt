@@ -1,6 +1,6 @@
 {
   "name": "shunt",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A shit alternative to grunt, hence sh+unt",
   "main": "shunt.js",
   "scripts": {
