@@ -261,7 +261,7 @@ module.exports = (function shunt(o,opts){
 			// Find script tags with local file references
 			buffer = buffer.replace(/<script src=([\'\"])(?!https?\:\/\/)(.*?)(\1)><\/script>/g, function(r,quot,m){
 
-				var path = (m.match(/^\//) ? opts.root_dir : '' ) + m ;
+				var path = (m.match(/^\//) ? opts.root_dir : dir ) + m ;
 
 				console.log("Embed javascript: "+ path);
 
@@ -278,7 +278,7 @@ module.exports = (function shunt(o,opts){
 			// Find and replace stylesheets with local file references
 			}).replace(/<link href=([\'\"])(?!https?\:\/\/)(.*?)(\1) rel="stylesheet"\/>/g, function(r,quot,m){
 
-				var path = (m.match(/^\//) ? opts.root_dir : '' ) + m ;
+				var path = (m.match(/^\//) ? opts.root_dir : dir ) + m ;
 				console.log("Embed css: "+ path);
 
 				// remove Byte Order mark with replace
